@@ -4,8 +4,10 @@
 #define _MM_H
 #undef _WCHAR_T_DEFINED
 #undef _WINT_T_DEFINED
+#define __need_wint_t
 #include <string.h>
 #include <stdint.h>
+#include <stddef.h>
 #include <math.h>
 
 #define SP

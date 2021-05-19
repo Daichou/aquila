@@ -39,19 +39,14 @@
 extern void matmul(const size_t coreid, const size_t ncores, const size_t lda,  const data_t A[], const data_t B[], data_t C[] );
 
 
-//--------------------------------------------------------------------------
-// Main
-//
-// all threads start executing thread_entry(). Use their "coreid" to
-// differentiate between threads (each thread is running on a separate core).
-  
-void thread_entry(int cid, int nc)
+void main(int cid, int nc)
 {
    static data_t results_data[ARRAY_SIZE];
 
-   stats(matmul(cid, nc, DIM_SIZE, input1_data, input2_data, results_data); barrier(nc), DIM_SIZE/DIM_SIZE/DIM_SIZE);
+   stats(matmul(0, 1, DIM_SIZE, input1_data, input2_data, results_data), DIM_SIZE/DIM_SIZE/DIM_SIZE);
  
    int res = verify(ARRAY_SIZE, results_data, verify_data);
 
-   exit(res);
+   printf("res : %d\n",res);
+   return 0;
 }

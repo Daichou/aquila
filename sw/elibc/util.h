@@ -4,7 +4,8 @@
 #define __UTIL_H
 #undef _WCHAR_T_DEFINED
 #undef _WINT_T_DEFINED
-//#include<stddef.h>
+#define __need_wint_t
+#include<stddef.h>
 #include <stdint.h>
 
 
@@ -88,4 +89,12 @@ static uintptr_t insn_len(uintptr_t pc)
              stringify(code), _c, _c/iter, 10*_c/iter%10, _c/_i, 10*_c/_i%10); \
   } while(0)
 
+#define cycle_stats(code, iter) do { \
+    unsigned long _c = -read_csr(mcycle); \
+    code; \
+    _c += read_csr(mcycle); \
+    if (cid == 0) \
+      printf("\n%s: %ld cycles, %ld.%ld cycles/iter\n", \
+             stringify(code), _c, _c/iter, 10*_c/iter%10); \
+  } while(0)
 #endif //__UTIL_H

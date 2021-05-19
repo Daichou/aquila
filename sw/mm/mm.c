@@ -1,9 +1,12 @@
 // See LICENSE for license details.
-#undef _WCHAR_T_DEFINED
-#undef _WINT_T_DEFINED
+//#undef _WCHAR_T_DEFINED
+//#undef _WINT_T_DEFINED
+#define __need_wint_t
+//#define wint_t unsigned int
 #include "common.h"
 #include <assert.h>
 #include <math.h>
+#include <stdint.h>
 #include <stdint.h>
 #include <alloca.h>
 

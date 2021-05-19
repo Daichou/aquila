@@ -8,7 +8,7 @@
 // third vector. The input data (and reference data) should be
 // generated using the vvadd_gendata.pl perl script and dumped
 // to a file named dataset1.h.
- 
+
 #include "util.h"
 
 //--------------------------------------------------------------------------
@@ -21,9 +21,9 @@
 
 void vvadd( int n, int a[], int b[], int c[] )
 {
-  int i;
-  for ( i = 0; i < n; i++ )
-    c[i] = a[i] + b[i];
+    int i;
+    for ( i = 0; i < n; i++ )
+        c[i] = a[i] + b[i];
 }
 
 //--------------------------------------------------------------------------
@@ -31,18 +31,20 @@ void vvadd( int n, int a[], int b[], int c[] )
 
 int main( int argc, char* argv[] )
 {
-  int results_data[DATA_SIZE];
-
+    int results_data[DATA_SIZE];
+    printf("vvadd\n");
 #if PREALLOCATE
-  // If needed we preallocate everything in the caches
-  vvadd( DATA_SIZE, input1_data, input2_data, results_data );
+    // If needed we preallocate everything in the caches
+    vvadd( DATA_SIZE, input1_data, input2_data, results_data );
 #endif
 
-  // Do the vvadd
-  setStats(1);
-  vvadd( DATA_SIZE, input1_data, input2_data, results_data );
-  setStats(0);
-
-  // Check the results
-  return verify( DATA_SIZE, results_data, verify_data );
+    // Do the vvadd
+    setStats(1);
+    vvadd( DATA_SIZE, input1_data, input2_data, results_data );
+    setStats(0);
+    disStats();
+    // Check the results
+    int ver = verify( DATA_SIZE, results_data, verify_data );
+    printf("ver = %d\n", ver);
+    return 0;
 }

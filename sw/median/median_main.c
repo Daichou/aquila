@@ -39,5 +39,7 @@ int main( int argc, char* argv[] )
     setStats(0);
     disStats();
     // Check the results
-    return verify( DATA_SIZE, results_data, verify_data );
+    int ver = verify( DATA_SIZE, results_data, verify_data );
+    printf("ver = %d\n",ver);
+    return 0;
 }
