@@ -55,7 +55,7 @@
 */
 __heap_start = 0x90000000;
 __heap_size  = 0x1FFF0000;
-__stack_top  = 0xAFFFFFF0;
+__stack_top  = 0xBFFF0000;
 
 MEMORY
 {

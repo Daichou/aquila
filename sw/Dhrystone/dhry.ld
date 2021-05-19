@@ -1,6 +1,6 @@
 /*
 // =============================================================================
-//  Program : dhry.ld
+//  Program : test.ld
 //  Author  : Chun-Jen Tsai
 //  Date    : Jan/14/2020
 // -----------------------------------------------------------------------------
@@ -53,14 +53,14 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 // =============================================================================
 */
-__heap_start = 0x0000A000;
-__heap_size  = 0x00005000;
-__stack_top  = 0x0000FFF0;
+__heap_start = 0x90000000;
+__heap_size  = 0x1FFF0000;
+__stack_top  = 0xBFFF0000;
 
 MEMORY
 {
-    code_ram   (rx!rw) : ORIGIN = 0x00001000, LENGTH = 0x5000
-    data_ram   (rw!x)  : ORIGIN = 0x00006000, LENGTH = 0x4000
+    code_ram   (rx!rw) : ORIGIN = 0x80000000, LENGTH = 0x8000
+    data_ram   (rw!x)  : ORIGIN = 0x80008000, LENGTH = 0x1000000
 }
 
 SECTIONS
