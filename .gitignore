@@ -47,6 +47,11 @@ tb/ver-test/*.map
 tb/ver-test/*.ebf
 
 # sw
+*.bin
+*.content
+*.objdump
+*.map
+*.ebf
 sw/test/*.bin
 sw/test/*.content
 sw/test/*.objdump
