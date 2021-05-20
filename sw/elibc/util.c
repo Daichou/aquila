@@ -12,7 +12,7 @@ extern volatile uint64_t tohost;
 extern volatile uint64_t fromhost;
 
 
-#define NUM_COUNTERS 1
+#define NUM_COUNTERS 2
 static uintptr_t counters[NUM_COUNTERS];
 static char* counter_names[NUM_COUNTERS];
 
@@ -27,7 +27,7 @@ void setStats(int enable)
   } while (0)
 
   READ_CTR(mcycle);
-  //READ_CTR(minstret);
+  READ_CTR(minstret);
 
 #undef READ_CTR
 }

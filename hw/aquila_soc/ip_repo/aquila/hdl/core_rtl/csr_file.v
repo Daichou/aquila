@@ -69,7 +69,7 @@ module csr_file #(parameter HART_ID = 0, XLEN = 32 )
     // Processor clock and reset signals.
     input               clk_i,
     input               rst_i,
-
+    input               stall_i,
     // From Decode.
     input [11: 0]       csr_raddr_i,
 
@@ -80,6 +80,7 @@ module csr_file #(parameter HART_ID = 0, XLEN = 32 )
     input               csr_we_i,
     input  [11: 0]      csr_waddr_i,
     input  [XLEN-1 : 0] csr_wdata_i,
+    input               fetch_valid_i,
 
     // Interrupt requests.
     input               ext_irq_i, // Machine external interrupt.
@@ -259,7 +260,7 @@ reg  [XLEN-1 : 0] mtval_r;  // for exception
 reg  [XLEN-1 : 0] medeleg_r;  // for exception
 reg  [XLEN-1 : 0] mideleg_r;  // for interrupt
 reg  [63           : 0] mcycle_r;
-//reg  [63 : 0] minstret_r;
+reg  [63 : 0] minstret_r;
 wire [XLEN-1 : 0] mvendorid = 0;  // Non-commercial implementation, so return 0
 wire [XLEN-1 : 0] marchid   = 0;
 wire [XLEN-1 : 0] mimpid    = 0;
@@ -569,7 +570,11 @@ begin
     begin
         mcycle_r    <= 64'b0;
     end
-    else if (csr_we_i)
+    else if (csr_we_i &&
+                (csr_waddr_i == `CSR_MCYCLE ||
+                 csr_waddr_i == `CSR_CYCLEH ||
+                 csr_waddr_i == `CSR_CYCLE ||
+                 csr_waddr_i == `CSR_MCYCLEH))
     begin
         case (csr_waddr_i)
             `CSR_MCYCLE :
@@ -590,6 +595,35 @@ begin
 end
 
 // TODO: minstret, minstreth
+//-----------------------------------------------
+// minstret, minstreth
+//-----------------------------------------------
+always @(posedge clk_i)
+begin
+    if (rst_i) begin
+        minstret_r <= 64'b0;
+    end else if (csr_we_i &&
+            (csr_waddr_i == `CSR_INSTRET ||
+             csr_waddr_i == `CSR_INSTRETH ||
+             csr_waddr_i == `CSR_MINSTRET ||
+             csr_waddr_i == `CSR_MINSTRETH)) begin
+        case(csr_waddr_i)
+            `CSR_INSTRET:
+                minstret_r <= {minstret_r[63:32], csr_wdata_i};
+            `CSR_MINSTRET:
+                minstret_r <= {minstret_r[63:32], csr_wdata_i};
+            `CSR_MINSTRETH:
+                minstret_r <= {csr_waddr_i, minstret_r[31:0]};
+            `CSR_INSTRETH:
+                minstret_r <= {csr_waddr_i, minstret_r[31:0]};
+        endcase
+    end else if (stall_i) begin
+        minstret_r <= minstret_r;
+    end else begin
+        minstret_r <= minstret_r + fetch_valid_i;
+    end
+end
+
 
 // =============================================================================================
 //  S-MODE SYSTEM Operations
@@ -803,8 +837,10 @@ begin
             csr_data = mcycle_r[31 : 0];
         `CSR_MCYCLEH:
             csr_data = mcycle_r[63: 32];
-        //`CSR_MINSTRET:  csr_data = minstret_r[XLEN-1 :0];
-        //`CSR_MINSTRETH: csr_data = minstret_r[63:32];
+        `CSR_MINSTRET:  csr_data = minstret_r[XLEN-1 :0];
+        `CSR_MINSTRETH: csr_data = minstret_r[63:32];
+        `CSR_INSTRET:  csr_data = minstret_r[XLEN-1 :0];
+        `CSR_INSTRETH: csr_data = minstret_r[63:32];
         `CSR_MVENDORID:
             csr_data = mvendorid;
         `CSR_MARCHID:

@@ -56,6 +56,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "encoding.h"
 
 void malloc_test(int nwords);
 void timer_isr_test();
@@ -102,14 +103,16 @@ unsigned int addr = 0;
 int main(void)
 {
     float ver = 1.0;
-
+    int begin_minstret = read_csr(instret);
     printf("Hello, Aquila %.1f!\n", ver);
     printf("The address of 'ver' is 0x%X\n\n", (unsigned) &ver);
-
+    printf("begin minstret %d\n\n", begin_minstret);
     printf("First time tick = %d\n\n", clock());
     malloc_test(5000);
     printf("\nSecond time tick = %d\n\n", clock());
 
+    int end_minstret = read_csr(instret);
+    printf("end minstret %d\n\n", end_minstret);
     timer_isr_test();
     printf("Waiting for timer ISR ...\n");
     // busy waiting ...

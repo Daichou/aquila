@@ -909,7 +909,7 @@ CSR(
     // Top-level system signals
     .clk_i(clk_i),
     .rst_i(rst_i),
-
+    .stall_i(stall_pipeline),
     // from Decode
     .csr_raddr_i(dec_csr_addr2csr),
 
@@ -920,6 +920,7 @@ CSR(
     .csr_we_i(wbk_csr_we),
     .csr_waddr_i(wbk_csr_addr),
     .csr_wdata_i(wbk_csr_data),
+    .fetch_valid_i(wbk_fetch_valid2csr),
 
     // Interrupt
     .ext_irq_i(ext_irq_i),
