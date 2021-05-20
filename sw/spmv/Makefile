@@ -21,8 +21,8 @@ LD_SOFT_FP = -L/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0 -lgcc
 OCFLAGS = -O binary
 ODFLAGS = -d
 
-PROJ = rsort
-OBJS = boot.o  rsort.o $(LIBC)/stdio.o $(LIBC)/stdlib.o $(LIBC)/string.o $(LIBC)/time.o $(LIBC)/uart.o $(LIBC)/util.o
+PROJ = spmv
+OBJS = boot.o  spmv_main.o $(LIBC)/stdio.o $(LIBC)/stdlib.o $(LIBC)/string.o $(LIBC)/time.o $(LIBC)/uart.o $(LIBC)/util.o
 
 all:
 	make $(PROJ).ebf

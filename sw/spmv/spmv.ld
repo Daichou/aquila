@@ -59,8 +59,8 @@ __stack_top  = 0xBFFF0000;
 
 MEMORY
 {
-    code_ram   (rx!rw) : ORIGIN = 0x80000000, LENGTH = 0x80000
-    data_ram   (rw!x)  : ORIGIN = 0x80080000, LENGTH = 0x1000000
+    code_ram   (rx!rw) : ORIGIN = 0x80000000, LENGTH = 0x8000
+    data_ram   (rw!x)  : ORIGIN = 0x80008000, LENGTH = 0x1000000
 }
 
 SECTIONS
@@ -69,7 +69,7 @@ SECTIONS
     {
         boot.o(.text)
         *(.text)
-        /opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/rv32im/ilp32/libgcc.a
+
     } > code_ram
 
     .data :
