@@ -39,4 +39,5 @@ void disStats()
     for (int i = 0; i < NUM_COUNTERS; i++)
         if (counters[i])
             printf( "%s = %d\n", counter_names[i], counters[i]);
+    printf("CPI: %ld.%ld\n\n",counters[0]/counters[1] , 10*counters[0]/counters[1]%10);
 }
