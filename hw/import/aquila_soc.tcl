@@ -127,7 +127,7 @@ if { $bCheckIPs == 1 } {
 xilinx.com:user:aquila:1.0\
 xilinx.com:ip:smartconnect:1.0\
 xilinx.com:ip:axi_uartlite:2.0\
-xilinx.com:ip:mig_7series:4.1\
+xilinx.com:ip:mig_7series:4.2\
 xilinx.com:ip:proc_sys_reset:5.0\
 "
 
