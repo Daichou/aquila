@@ -26,12 +26,12 @@ int main( int argc, char* argv[] )
     int i;
     int results_data[DATA_SIZE];
 
-#if PREALLOCATE
+//#if PREALLOCATE
     for (i = 0; i < DATA_SIZE; i++)
     {
         results_data[i] = multiply( input_data1[i], input_data2[i] );
     }
-#endif
+//#endif
 
     setStats(1);
     for (i = 0; i < DATA_SIZE; i++)

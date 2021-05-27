@@ -41,9 +41,9 @@ int main( int argc, char* argv[] )
     double y[R];
 
     printf("spmv\n");
-#if PREALLOCATE
+//#if PREALLOCATE
     spmv(R, val, idx, x, ptr, y);
-#endif
+//#endif
 
     setStats(1);
     spmv(R, val, idx, x, ptr, y);

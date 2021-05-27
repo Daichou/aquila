@@ -26,11 +26,11 @@ int main( int argc, char* argv[] )
 {
     int results_data[DATA_SIZE];
     printf("Median benchmark\n");
-//#if PREALLOCATE
+#if PREALLOCATE
     printf("Median benchmark preallocate...\n");
     // If needed we preallocate everything in the caches
     median( DATA_SIZE, input_data, results_data );
-//#endif
+#endif
     printf("Median benchmark start\n");
 
     // Do the filter

@@ -1,0 +1,32 @@
+Copyright (c) 2019-2020, EISL@NCTU, Hsinchu, Taiwan.
+The Aquila SoC is ready to go.
+Waiting for a program to be sent from the UART ...
+Aquila executes code at 0x80000000, size = 0x100C38 bytes.
+-----------------------------------------------------------------------
+coremark
+2K validation run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 12771441
+Total time (secs): 12.771441
+Iterations/Sec   : 156.599400
+Iterations       : 2000
+Compiler version : GCC10.2.0
+Compiler flags   : -Wall -O2 -I../elibc -fomit-frame-pointer -fno-builtin -march=rv32im -mstrict-align -mabi=ilp32 -DITERATIONS=2000 -DVALIDATION_RUN=1  
+Memory location  : STACK
+seedcrc          : 0x18f2
+[0]crclist       : 0xe3c1
+[0]crcmatrix     : 0x0747
+[0]crcstate      : 0x8d84
+[0]crcfinal      : 0x0cac
+Correct operation validated. See README.md for run and reporting rules.
+
+-----------------------------------------------------------------------
+Aquila execution finished.
+
+
+Program exit with a status code 0
+
+-----------------------------------------------------------------------
+Aquila execution finished.
+Press <reset> on the FPGA board to reboot the cpu ...
+

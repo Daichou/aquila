@@ -105,12 +105,12 @@ int main( int argc, char* argv[] )
 {
     static type scratch[DATA_SIZE];
 
-#if PREALLOCATE
+//#if PREALLOCATE
     // If needed we preallocate everything in the caches
     sort(DATA_SIZE, verify_data, scratch);
     if (verify(DATA_SIZE, input_data, input_data))
         return 1;
-#endif
+//#endif
 
     // Do the sort
     setStats(1);

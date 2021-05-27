@@ -33,10 +33,10 @@ int main( int argc, char* argv[] )
 {
     int results_data[DATA_SIZE];
     printf("vvadd\n");
-#if PREALLOCATE
+//#if PREALLOCATE
     // If needed we preallocate everything in the caches
     vvadd( DATA_SIZE, input1_data, input2_data, results_data );
-#endif
+//#endif
 
     // Do the vvadd
     setStats(1);

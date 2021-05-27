@@ -34,10 +34,10 @@ void main()
     size_t instret, cycles;
     for (int i = 0; i < R; i++)
     {
-        //instret = -read_csr(minstret);
+        instret = -read_csr(minstret);
         cycles = -read_csr(mcycle);
         mm(m, n, p, a, p, b, n, c, n);
-        //instret += read_csr(minstret);
+        instret += read_csr(minstret);
         cycles += read_csr(mcycle);
     }
 
@@ -45,7 +45,7 @@ void main()
 
     printf("C%d: reg block %dx%dx%d, cache block %dx%dx%d\n",
             cid, RBM, RBN, RBK, CBM, CBN, CBK);
-    //printf("C%d: %d instructions\n", cid, (int)(instret));
+    printf("C%d: %d instructions\n", cid, (int)(instret));
     printf("C%d: %d cycles\n", cid, (int)(cycles));
     printf("C%d: %d flops\n", cid, 2*m*n*p);
     printf("C%d: %d Mflops @ 1 GHz\n", cid, 2000*m*n*p/(cycles));
