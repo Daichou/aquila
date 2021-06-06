@@ -41,7 +41,8 @@ extern void matmul(const size_t coreid, const size_t ncores, const size_t lda,  
 
 void main(int cid, int nc)
 {
-   static data_t results_data[ARRAY_SIZE];
+    printf("matmul\n");
+    static data_t results_data[ARRAY_SIZE];
 
    stats(matmul(0, 1, DIM_SIZE, input1_data, input2_data, results_data), DIM_SIZE/DIM_SIZE/DIM_SIZE);
  

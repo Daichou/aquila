@@ -9,6 +9,7 @@
 
 void main()
 {
+    printf("mm\n");
     int cid  = 0;
     int nc  = 1;
     const int R = 8;

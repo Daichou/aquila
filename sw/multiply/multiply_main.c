@@ -23,6 +23,7 @@
 
 int main( int argc, char* argv[] )
 {
+    printf("multiply\n");
     int i;
     int results_data[DATA_SIZE];
 

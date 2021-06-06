@@ -13,16 +13,16 @@ OC = $(CCPATH)/$(CROSS)-objcopy
 OD = $(CCPATH)/$(CROSS)-objdump
 
 LIBC = ../elibc
-
+LD_FILE = dhry_tcm.ld
 CCFLAGS = -Wall -O2 -I$(LIBC) -fomit-frame-pointer -fno-builtin -march=rv32im -mstrict-align -mabi=ilp32
-LDFLAGS = -T$(PROJ).ld -Map=$(PROJ).map
+LDFLAGS = -T$(LD_FILE) -Map=$(PROJ).map
 LD_SOFT_FP = -L/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0 -lgcc
 
 OCFLAGS = -O binary
 ODFLAGS = -d
 
 PROJ = dhry
-OBJS = boot.o dhry_1.o dhry_2.o $(LIBC)/stdio.o $(LIBC)/stdlib.o $(LIBC)/string.o $(LIBC)/time.o $(LIBC)/uart.o
+OBJS = crt.o boot.o dhry_1.o dhry_2.o $(LIBC)/stdio.o $(LIBC)/stdlib.o $(LIBC)/string.o $(LIBC)/time.o $(LIBC)/uart.o
 
 all:
 	make $(PROJ).ebf
@@ -30,7 +30,9 @@ all:
 clean:
 	rm -rf *.s $(LIBC)/*.o *.o *.bin *.objdump *.map *.ebf *.content
 
-%.o: %.c $(PROJ).ld
+%.o: %.c $(LD_FILE)
+	$(CC) $(CCFLAGS) -c $< -o $@
+%.o: %.S $(LD_FILE)
 	$(CC) $(CCFLAGS) -c $< -o $@
 
 _$(PROJ).o: $(OBJS)

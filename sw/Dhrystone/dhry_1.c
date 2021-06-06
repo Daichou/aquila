@@ -73,6 +73,7 @@ main ()
   REG   int             Run_Index;
   REG   int             Number_Of_Runs;
 
+  printf("dhry before malloc\n");
   /* Initializations */
 
   Next_Ptr_Glob = (Rec_Pointer) malloc (sizeof (Rec_Type));
